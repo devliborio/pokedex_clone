@@ -1,10 +1,10 @@
 <template>
   <div id="app">
-    
-    <h1 class="title is-2">Pokedex com Vue.js</h1>
 
     <div class="column is-half is-offset-one-quarter">
-      <div v-for='(poke,index) in pokemons' :key="index"> 
+      <h1 class="title is-2">Pokedex com Vue.js</h1>
+      <input class="input is-rounded" type="text" placeholder="Buscar Pokemon pelo nome" v-model="search">
+      <div v-for='(poke,index) in resultSearch' :key="poke.url"> 
       <Pokemon :name="poke.name" :url="poke.url" :num="index + 1" />
     </div>
 
@@ -19,7 +19,8 @@ export default {
   name: 'App',
     data() {
     return {
-      pokemons: [] // Variável que vai receber
+      pokemons: [], // Variável que vai receber os dados da Poke API
+      search: ''
     };
   },
   created: function () { // Método que é chamado toda vez que o componente é carregado na aplicação.
@@ -30,6 +31,16 @@ export default {
 
   components: {
     Pokemon
+  },
+
+  computed: {
+    resultSearch: function(){
+      if(this.search == '' || this.search == ' '){
+         return this.pokemons;
+      } else {
+        return this.pokemons.filter(pokemon => pokemon.name == this.search)
+      }
+    }
   }
 };
 </script>
@@ -39,5 +50,10 @@ export default {
     text-align: center;
     margin-top: 60px;
     margin-bottom: 60px;
+  }
+
+  #searchBtn{
+    margin-top: 2%;
+    margin-bottom: 8%;
   }
 </style>
