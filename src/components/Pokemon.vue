@@ -20,7 +20,7 @@
             </div>
 
             <div class="content">
-                <button class="button is-normal is-fullwidth" @click="changeSprite">Girar</button>
+                <button class="button is-normal is-success is-light is-fullwidth" @click="changeSprite">Girar</button>
             </div>
       </div>
 
