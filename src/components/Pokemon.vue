@@ -4,7 +4,7 @@
 
         <div class="card-image">
             <figure>
-                <img :src="pokemon.front">
+                <img :src="currentImg">
             </figure>
         </div>
 
@@ -20,7 +20,7 @@
             </div>
 
             <div class="content">
-
+                <button class="button is-normal is-info" @click="changeSprite">Girar</button>
             </div>
       </div>
 
@@ -38,18 +38,22 @@ export default {
             this.pokemon.type = res.data.types[0].type.name; 
             this.pokemon.front = res.data.sprites.front_default; 
             this.pokemon.back = res.data.sprites.back_default;
+            this.currentImg = this.pokemon.front;
             // Uma observação importante é que as variáveis (type, front e back se forem cridas somente pela requisição do axios ela não será reativa no HTML então se você quiser reatividade você terá que definir ela dentro do método data(){}.
         })
     },
 
     data(){
-        return{
-            pokemon: {
-                type: '',
-                front: '',
-                back: ''
-            }
+      return{
+        isFront: true,
+        currentImg: '',
+
+        pokemon: {
+            type: '',
+            front: '',
+            back: ''
         }
+      } 
     },
 
     props: {
@@ -59,10 +63,21 @@ export default {
     },
 
     methods: { // Agora os filtros podem ser usado como métodos normais
+
+        changeSprite: function(){
+             if(this.isFront){
+                    this.isFront = false;
+                    this.currentImg = this.pokemon.back;
+            } else {
+                     this.isFront = true;
+                     this.currentImg = this.pokemon.front;
+            }
+        },
+
         upper: function (value) {
             let newName = value[0].toUpperCase() + value.slice(1); 
             return newName;
-        }    
+        }
     }
 }
 </script>
