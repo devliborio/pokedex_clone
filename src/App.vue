@@ -1,5 +1,7 @@
 <template>
   <div id="app">
+    
+    <h1 class="title is-2">Pokedex com Vue.js</h1>
 
     <div class="column is-half is-offset-one-quarter">
       <div v-for='(poke,index) in pokemons' :key="index"> 
@@ -33,4 +35,9 @@ export default {
 </script>
 
 <style>
+  #app{
+    text-align: center;
+    margin-top: 60px;
+    margin-bottom: 60px;
+  }
 </style>
